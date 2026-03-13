@@ -1,0 +1,18 @@
+# Render.com Blueprint — auto-deploy the DOPAENERGY game server
+# Push this repo to GitHub, connect Render, and it deploys automatically.
+
+services:
+  - type: web
+    name: dopaenergy-server
+    runtime: node
+    region: frankfurt   # closest to EU players
+    plan: free          # upgrade to starter ($7/mo) for always-on
+    rootDir: server
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 2567
+    healthCheckPath: /health
