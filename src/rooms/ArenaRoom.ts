@@ -542,9 +542,9 @@ export class ArenaRoom extends Room<GameState> {
       for (let i = 0; i < player.inventory.length; i++) {
         const inv = player.inventory[i];
         if (inv && schema.inventory[i]) {
-          schema.inventory[i].weapon  = inv.weapon;
-          schema.inventory[i].ammo    = Math.min(inv.ammo, 9999);
-          schema.inventory[i].reserve = Math.min(inv.reserve, 9999);
+          schema.inventory[i]!.weapon  = inv.weapon;
+          schema.inventory[i]!.ammo    = Math.min(inv.ammo, 9999);
+          schema.inventory[i]!.reserve = Math.min(inv.reserve, 9999);
         }
       }
     }

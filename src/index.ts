@@ -37,19 +37,19 @@ app.get('/health', (_req, res) => {
     status: 'ok',
     uptime: process.uptime(),
     timestamp: Date.now(),
-    rooms: gameServer.matchMaker.stats?.roomCount ?? 0,
+    rooms: 0,
   });
 });
 
 // API: list active rooms
 app.get('/api/rooms', async (_req, res) => {
   try {
-    const rooms = await gameServer.matchMaker.query({ name: 'arena' });
-    res.json(rooms.map(r => ({
+    const rooms = await (gameServer as any).matchMaker?.query({ name: 'arena' }) || [];
+    res.json(rooms.map((r: any) => ({
       roomId:    r.roomId,
       players:   r.clients,
       maxPlayers: r.maxClients,
-      phase:     (r.metadata as any)?.phase || 'lobby',
+      phase:     r.metadata?.phase || 'lobby',
       locked:    r.locked,
       createdAt: r.createdAt,
     })));

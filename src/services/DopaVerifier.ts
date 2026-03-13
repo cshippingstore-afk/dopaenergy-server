@@ -79,7 +79,7 @@ export class DopaVerifier {
       body: JSON.stringify(body),
     });
 
-    const json = await res.json();
+    const json: any = await res.json();
     const accounts = json?.result?.value || [];
 
     if (accounts.length === 0) return 0;
